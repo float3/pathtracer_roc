@@ -1,0 +1,3 @@
+[submodule "roc-image"]
+	path = roc-image
+	url = git@github.com:shritesh/roc-image.git

@@ -1,6 +1,5 @@
 interface Float4
-    exposes [Float4, new , get, x, y, z, w, scale, dot, length, normalize, add, sub, mul, div, pow
-    ]
+    exposes [Float4, new , get, scale, dot, length, normalize, add, sub, mul, div, pow]
     imports []
 
 Float4 := { x: F64, y: F64, z: F64, w: F64 }
@@ -18,18 +17,6 @@ idx = \@Float4 vec, i ->
         3 -> Ok vec.w
         _ -> Err OutOfBounds
 
-x : Float4 -> F64
-x = \@Float4 vec -> vec.x
-
-y : Float4 -> F64
-y = \@Float4 vec -> vec.y
-
-z : Float4 -> F64
-z = \@Float4 vec -> vec.z
-
-w : Float4 -> F64
-w = \@Float4 vec -> vec.w
-
 scale : Float4, F64 -> Float4
 scale = \@Float4 vec, scalar ->
     x = vec.x * scalar
@@ -44,7 +31,7 @@ dot = \@Float4 a, b ->
 
 length : Float4 -> F64
 length = \@Float4 vec ->
-    sqrt(dot(vec, vec))
+    Num.sqrt(dot(vec, vec))
 
 normalize : Float4 -> Float4
 normalize = \@Float4 vec ->

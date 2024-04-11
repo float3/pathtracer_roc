@@ -1,5 +1,5 @@
 interface Float3
-    exposes [Float3, get]
+    exposes [Float3, new, get, x, y, z, w, scale, dot, length, normalize, add, sub, mul, div, pow]
     imports []
 
 Float3 := { x: F64, y: F64, z: F64 }
@@ -38,10 +38,6 @@ dot = \@Float3 a, b ->
 length : Float3 -> F64
 length = \@Float3 vec ->
     sqrt(dot(vec, vec))
-
-length_squared : Float3 -> F64
-length_squared = \@Float3 vec ->
-    dot(vec, vec)
 
 normalize : Float3 -> Float3
 normalize = \@Float3 vec ->

@@ -1,5 +1,6 @@
 interface Float4
-    exposes [Float4, get]
+    exposes [Float4, new , get, x, y, z, w, scale, dot, length, normalize, add, sub, mul, div, pow
+    ]
     imports []
 
 Float4 := { x: F64, y: F64, z: F64, w: F64 }
@@ -31,10 +32,11 @@ w = \@Float4 vec -> vec.w
 
 scale : Float4, F64 -> Float4
 scale = \@Float4 vec, scalar ->
-    x = vec.x * scalar,
+    x = vec.x * scalar
     y = vec.y * scalar
     z = vec.z * scalar
     w = vec.w * scalar
+    @Float4 { x, y, z, w }
 
 dot: Float4, Float4 -> F64
 dot = \@Float4 a, b ->
@@ -44,10 +46,6 @@ length : Float4 -> F64
 length = \@Float4 vec ->
     sqrt(dot(vec, vec))
 
-length_squared : Float4 -> F64
-length_squared = \@Float4 vec ->
-    dot(vec, vec)
-
 normalize : Float4 -> Float4
 normalize = \@Float4 vec ->
     len = length(vec)
@@ -55,35 +53,40 @@ normalize = \@Float4 vec ->
 
 add : Float4, Float4 -> Float4
 add = \@Float4 a, b ->
-    x = a.x + b.x,
-    y = a.y + b.y,
-    z = a.z + b.z,
+    x = a.x + b.x
+    y = a.y + b.y
+    z = a.z + b.z
     w = a.w + b.w
+    @Float4 { x, y, z, w }
 
 sub : Float4, Float4 -> Float4
 sub = \@Float4 a, b ->
-    x = a.x - b.x,
-    y = a.y - b.y,
-    z = a.z - b.z,
+    x = a.x - b.x
+    y = a.y - b.y
+    z = a.z - b.z
     w = a.w - b.w
+    @Float4 { x, y, z, w }
 
 mul : Float4, Float4 -> Float4
 mul = \@Float4 a, b ->
-    x = a.x * b.x,
-    y = a.y * b.y,
-    z = a.z * b.z,
+    x = a.x * b.x
+    y = a.y * b.y
+    z = a.z * b.z
     w = a.w * b.w
+    @Float4 { x, y, z, w }
 
 div : Float4, Float4 -> Float4
 div = \@Float4 a, b ->
-    x = a.x / b.x,
-    y = a.y / b.y,
-    z = a.z / b.z,
+    x = a.x / b.x
+    y = a.y / b.y
+    z = a.z / b.z
     w = a.w / b.w
+    @Float4 { x, y, z, w }
 
 pow : Float4, Float4 -> Float4
 pow = \@Float4 a, b ->
-    x = a.x ^ b.x,
-    y = a.y ^ b.y,
-    z = a.z ^ b.z,
+    x = a.x ^ b.x
+    y = a.y ^ b.y
+    z = a.z ^ b.z
     w = a.w ^ b.w
+    @Float4 { x, y, z, w }

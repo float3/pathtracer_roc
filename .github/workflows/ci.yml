@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  render:
+    name: Check, build and render
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install Roc
+        uses: roc-lang/setup-roc@cbe782d6f165b89c87d99f50a59ac4f5f73b4427
+        with:
+          version: nightly-new-compiler
+          nightly-tag: nightly-2026-08-30-34e7489
+
+      - name: Check formatting
+        run: roc fmt --check main.roc
+
+      - name: Check
+        run: roc check main.roc
+
+      - name: Build
+        run: roc build --opt=speed --output=pathtracer main.roc
+
+      - name: Render
+        run: ./pathtracer
+
+      - name: Convert to PNG
+        run: ffmpeg -loglevel error -y -i output.ppm render.png
+
+      - name: Upload render
+        uses: actions/upload-artifact@v7
+        with:
+          name: render
+          path: render.png

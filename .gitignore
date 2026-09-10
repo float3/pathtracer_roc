@@ -1,2 +1,4 @@
-main
-result
+output.ppm
+pathtracer
+pathtracer.exe
+pathtracer.lib

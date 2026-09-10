@@ -42,7 +42,9 @@ jobs:
         run: ./pathtracer
 
       - name: Convert to PNG
-        run: ffmpeg -loglevel error -y -i output.ppm render.png
+        run: |
+          pip install --quiet pillow
+          python3 -c "from PIL import Image; Image.open('output.ppm').save('render.png')"
 
       - name: Upload render
         uses: actions/upload-artifact@v7
